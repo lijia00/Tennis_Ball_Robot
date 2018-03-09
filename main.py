@@ -4,12 +4,15 @@ import imutils
 import cv2
 
 import sys
+
 PY3 = sys.version_info[0] == 3
 if PY3:
     xrange = range
 
-cap = cv2.VideoCapture(0)
-
+try:
+    cap = cv2.VideoCapture(0)
+except Exception as x:
+    print("yikes, that didn't work!, Error: {}".format(x))
 
 # define the lower and upper boundaries of the "green"
 # ball in the HSV color space, then initialize the
@@ -17,15 +20,12 @@ cap = cv2.VideoCapture(0)
 greenLower = (29, 86, 6)
 greenUpper = (64, 255, 255)
 
-
-while(True):
+while True:
     # Capture frame-by-frame
     ret, frame = cap.read()
 
-
     frame = imutils.resize(frame, width=600)
     # blurred = cv2.GaussianBlur(frame, (11,11), 0)
-
 
     # Our operations on the frame come here
     # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -37,7 +37,6 @@ while(True):
     mask = cv2.inRange(hsv, greenLower, greenUpper)
     mask = cv2.erode(mask, None, iterations=3)
     mask = cv2.dilate(mask, None, iterations=3)
-
 
     # find contours in the mask and initialize the current
     # (x, y) center of the ball
@@ -63,8 +62,6 @@ while(True):
                        (0, 255, 255), 2)
             cv2.circle(frame, center, 5, (0, 0, 255), -1)
 
-
-
     # show the frame to our screen
     cv2.imshow("Frame2", frame)
     cv2.imshow("Frame", mask)
@@ -77,5 +74,3 @@ while(True):
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
-
-

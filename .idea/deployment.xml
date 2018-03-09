@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="rpi_remote_tennis_proj">
+    <serverData>
+      <paths name="rpi_remote_tennis_proj">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/pi/Pywork" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
